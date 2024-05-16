@@ -1,0 +1,19 @@
+{%  extends "base.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rejestracja nowego klienta</title>
+</head>
+<body>
+<h2> Rejestracja nowego klienta </h2>
+<form method="post" action=".">
+    {% csrf_token %}
+    <div style="text-align:left">{{ form.as_p }}</div>
+    <input type="submit" value="Submit">
+</form>
+
+</body>
+</html>
+{% endblock %}
