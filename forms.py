@@ -1,8 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from recipes.models import MenuItem
-from orders.models import OrderItem
+from recipes.models import MenuItem, Ingredient
+from orders.models import OrderItem, Reservation
 
 
 class LoginForm(forms.Form):
@@ -27,3 +27,14 @@ class OrderItemForm(forms.ModelForm):
         model = OrderItem
         fields = ['menu_item', 'quantity']
 
+
+class ReservationForm(forms.ModelForm):
+    class Meta:
+        model = Reservation
+        fields = ['table', 'date', 'time', 'customer_name', 'order']
+
+
+class IngredientForm(forms.ModelForm):
+    class Meta:
+        model = Ingredient
+        fields = ['name', 'quantity']

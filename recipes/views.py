@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib import messages
 from .models import MenuItem
-from forms import MenuItemForm
+from forms import MenuItemForm, IngredientForm
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -15,6 +16,23 @@ class RecipesView(View):
             'menu_items': menu_items,
         }
         return render(request, 'menu.html', ctx)
+
+
+@login_required
+class IngredientView(View):
+    def get(self, request):
+        form = IngredientForm()
+        ctx = {
+            'form': form
+        }
+        return render(request, 'ingredient.html', ctx)
+
+    def post(self, request):
+        form = IngredientForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('menu.html')
+        return render(request, 'ingredient.html', {'form': form})
 
 
 class AddMenuItemView(View):
