@@ -54,3 +54,4 @@ class ReservationView(View):
             form.save()
             return redirect('success_url')
         return render(request, 'reservation.html', {'form': form})
+
